@@ -1,0 +1,297 @@
+.no_margin {
+  margin: 0%;
+}
+
+/* Encabezado */
+header {
+  background-color: orange;
+  height: 20rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pedidos {
+  height: 8rem;
+  width: 100vw;
+}
+
+.logo {
+  height: 6rem;
+  display: none;
+}
+
+div[id*=menu] {
+  text-align: right;
+}
+
+.boton {
+  display: flex;
+  background-color: yellow;
+  margin-top: 1rem;
+  margin-right: 3%;
+  height: 4rem;
+  width: 8rem;
+  box-shadow: 0px 8px 10px black;
+  border-radius: 2em;
+  justify-content: center;
+}
+
+.boton--texto {
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 700;
+  font-size: larger;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+}
+
+.menu--ham {
+  max-height: 4rem;
+}
+
+.menu--ham:last-of-type {
+  margin-left: 0;
+}
+
+.contenedor {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: 20rem;
+}
+
+.imagen1 {
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: -1;
+  background-image: url(../img/Back2.jpg);
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+.imagen2, .imagen3 {
+  display: none;
+}
+
+.flecha {
+  display: none;
+  max-width: 20%;
+  margin-top: 50%;
+}
+
+#flecha1 {
+  transform: rotate(-180deg);
+}
+
+#flecha2 {
+  margin-left: 80%;
+}
+
+@media (min-width: 1025px) {
+  header {
+    height: 10rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    position: sticky;
+    align-items: start;
+  }
+  .pedidos {
+    height: 10rem;
+    width: 15rem;
+  }
+  .logo {
+    display: block;
+    height: 11rem;
+    margin: 2rem 30% 2rem 30%;
+  }
+  .logo:hover {
+    height: 12rem;
+  }
+  .boton {
+    display: block;
+  }
+  .boton:hover {
+    color: white;
+    background-color: red;
+  }
+  .menu--ham:last-of-type {
+    margin-left: 0;
+  }
+  .menu--ham:hover {
+    background-color: orangered;
+    border-radius: 80%;
+  }
+  .contenedor {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: 50rem;
+  }
+  .imagen1, .imagen2, .imagen3 {
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -1;
+    display: grid;
+  }
+  .imagen1 {
+    background-image: url(../img/Back1.jpg);
+    grid-column-start: 1;
+    grid-column-end: 2;
+  }
+  .imagen2 {
+    background-image: url(../img/Back2.jpg);
+  }
+  .imagen3 {
+    background-image: url(../img/Back3.jpg);
+  }
+  .flecha {
+    max-width: 20%;
+    margin-top: 50%;
+  }
+  #flecha1 {
+    transform: rotate(-180deg);
+  }
+  #flecha2 {
+    margin-left: 80%;
+  }
+}
+/* Cuerpo Principal */
+.tarjetas {
+  background-color: orangered;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  justify-content: center;
+  width: 100vw;
+}
+
+.tarjeta {
+  right: 5%;
+  background-color: yellow;
+  border: 1px solid orange;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 1rem 0;
+  margin: 0.5em 0.5em 0.5em 0.5em;
+  z-index: 2;
+  font-family: "Shadows Into Light", cursive;
+  font-weight: 400;
+  width: 90vw;
+}
+
+.pesa {
+  display: none;
+}
+
+.contactos {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 10rem;
+}
+
+.apartados {
+  border: 1px solid orange;
+  width: 90vw;
+}
+
+div h1 {
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  font-family: "Rubik Distressed", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+ul {
+  margin-top: 0.5rem;
+  padding-left: 1em;
+}
+
+ul li {
+  list-style-type: none;
+  font-size: large;
+}
+
+.redes {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.socials {
+  height: 3.5rem;
+  width: 3.5rem;
+  margin-left: 2.5rem;
+}
+
+.socials:last-child {
+  margin-top: 0.1em;
+}
+
+@media (min-width: 1025px) {
+  .tarjetas {
+    background-color: orange;
+    height: 10rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 2rem;
+    width: 99.2vw;
+  }
+  .tarjeta {
+    width: 20vw;
+  }
+  .pesa {
+    display: inline;
+    max-width: 20%;
+    bottom: 40%;
+    left: 40%;
+  }
+  .contactos {
+    background-color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .apartados {
+    border-left: 1px solid orange;
+    width: 33vw;
+    height: 100%;
+  }
+  .apartados:first-of-type {
+    border-left: none;
+  }
+  div h1 {
+    text-indent: 7%;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    font-family: "Rubik Distressed", system-ui;
+    font-weight: 400;
+    font-style: normal;
+  }
+  ul {
+    margin-top: 0.5rem;
+  }
+  ul li {
+    list-style-type: none;
+    font-size: large;
+  }
+  .redes {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .socials {
+    height: 3.5rem;
+    width: 3.5rem;
+    margin-left: 2.5rem;
+  }
+  .socials:hover {
+    background-color: orangered;
+    border-radius: 80%;
+  }
+  .pie {
+    background-color: orange;
+    height: 1rem;
+  }
+}/*# sourceMappingURL=styles.css.map */
