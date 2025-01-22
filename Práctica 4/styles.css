@@ -1,0 +1,113 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: lightgreen;
+}
+header {
+    height: 12vh;
+    width: auto;
+    background-color: purple;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: aliceblue;
+    margin-bottom: 2rem;
+}
+.Redes {
+    display: flex;
+    gap: 1em;
+    margin-left: 1em;
+}
+.Redes img {
+    height: 30px;
+    width: 30px;
+}
+.Account {
+    margin-right: 1em;
+}
+.Busqueda {
+    text-align: center;
+    background-color: antiquewhite;
+    margin-bottom: 1em;
+    width: 60vw;
+    margin-left: 20vw;
+    border-radius: 2rem;
+}
+.Apartados {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: blueviolet;
+    color: white;
+    width: 85vw;
+    margin-left: 7.5vw;
+    height: 10vh;
+    margin-bottom: 1em;
+}
+.Apartado {
+    padding: 0 3vw;
+    border-right: 1px dashed white;
+}
+.Apartado:last-of-type {
+    border: none;
+}
+.Apartado img {
+    max-height: 8vh;
+    max-width: 6vw;
+    align-items: center;
+}
+.Cuerpo {
+    background-color: blueviolet;
+    width: 80vw;
+    margin-left: 10vw;
+    padding-top: 0.5vw;
+    color: white;
+    padding-bottom: 1rem;
+}
+.Titulo {
+    background-color: purple;
+    width: 15vw;
+    margin-left: 1rem;
+    text-align: center;
+    border-radius: 2rem;
+    
+}
+.Productos {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px dashed purple;
+    padding-bottom: 2em;
+}
+.Productos:last-of-type {
+    border: none;
+}
+.Producto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.Manuales img {
+    width: 12vw;
+    height: 36vh;
+}
+.Dados img, .Minis img {
+    width: 15vw;
+    height: 15vw;
+    margin-bottom: 1vh;
+}
+.mas {
+    width: 12vw;
+    text-align: center;
+    background-color: purple;
+    margin-left: 35vw;
+    border-radius: 2rem;
+}
+
+
+
+footer {
+    background-color: purple;
+    display: flex;
+    justify-content: space-around;
+}
