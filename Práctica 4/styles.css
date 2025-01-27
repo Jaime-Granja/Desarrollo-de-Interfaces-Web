@@ -28,11 +28,12 @@ header {
     height: 32px;
     width: 32px;
 }
-
 .Logo {
     animation-name: logo;
     animation-duration: 6s;
     animation-delay: 2s;
+    animation-fill-mode: backwards;
+    animation-timing-function: ease-in
 }
 @keyframes logo {
     from{
@@ -135,10 +136,11 @@ header {
 .Producto img {
     animation-name: torbellino;
     animation-duration: 2.2s;
+    animation-timing-function: ease-out
 }
 @keyframes torbellino {
     from{opacity: 0.5;
-        rotate: 980deg;
+        rotate: 9800deg;
         height: 3px;
     }
     to{
@@ -177,10 +179,23 @@ header {
 }
 
 footer {
-    height: 10vw;
     padding-top: 1vw;
     background-color: purple;
     display: flex;
     justify-content: space-around;
     color: lightgreen;
+    
+}
+.nosotros, .proyectos, .contactos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 1vh;
+    gap: 1vh;
+    list-style: none;
+}
+iframe, video {
+    width: 320px;
+    aspect-ratio: auto 320 / 240;
+    height: 240px;
 }
