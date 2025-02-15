@@ -1,0 +1,12 @@
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(17, 1fr);
+    grid-template-rows: repeat(21, 1fr);
+}
+#mapa {
+    height: 810px;
+    width: 650px;
+    grid-column: span 17; 
+    grid-row: span 21;
+}
