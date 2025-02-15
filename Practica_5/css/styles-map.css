@@ -1,12 +1,44 @@
 
 #grid {
     display: grid;
+    position: relative;
     grid-template-columns: repeat(17, 1fr);
     grid-template-rows: repeat(21, 1fr);
+}
+#grid:hover {
+    cursor: pointer;
 }
 #mapa {
     height: 810px;
     width: 650px;
     grid-column: span 17; 
     grid-row: span 21;
+    object-fit: cover;
+}
+.treasure {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: gold;
+    position: absolute;
+    opacity: 0; /* Inicialmente invisible */
+    transition: opacity 0.3s ease; /* Suaviza el cambio de opacidad */
+}
+.x-roja {
+    position: absolute;
+    font-size: 24px;
+    color: red;
+    font-weight: bold;
+    pointer-events: none; /* Asegúrate de que no interfiera con los clics */
+}
+
+#margenes {
+    display: flex;
+    gap: 2rem;
+}
+button {
+    height: 3rem;
+    margin-top: 47.7rem;
 }
