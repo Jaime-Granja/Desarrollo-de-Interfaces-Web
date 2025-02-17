@@ -3,15 +3,20 @@
     gap: 20rem;
     margin-top: 5rem;  
     }
-    #tutorialTexto, #confirmarTexto {    
-        margin-top: 4rem;
-        margin-bottom: 4rem;
-        padding: 2rem;
-        height: 20rem;
-        display: none;
-        background-color: #d4b790; 
-        border: 3px solid #8b5a2b;
-        color: #4b3621;
-        overflow: hidden;
+#tutorialTexto, #confirmarTexto {    
+     margin-top: 4rem;
+    margin-bottom: 4rem;
+    padding: 2rem;
+    display: none;
+    background-color: #d4b790; 
+    border: 3px solid #8b5a2b;
+    color: #4b3621;
+    overflow: hidden;
     }
+#tutorialTexto {
+    height: 25rem;
+}
+#confirmarTexto {
+    height: 15rem;
+}
     

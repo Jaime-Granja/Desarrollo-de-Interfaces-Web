@@ -8,13 +8,19 @@
     <link rel="stylesheet" href="./css/styles-map.css">
 </head>
 <body>
-    <p>Encuentra el Tesoro</p>
-    <div id="margenes">
+    <h1>Encuentra el Tesoro</h1>
+    <div id="cuerpo">
         <div id="grid">
             <img src="./img/Mapa.jpg" id="mapa" alt="Mapa">
         </div>
-        <p>Errores: <span id="contadorErrores">0</span></p>
-        <button id="goBack">Retroceder</button>
+        <div class="margenes">
+            <p>Errores: <span id="contadorErrores">0</span></p>
+            <div class="brujula"><img src="./img/Rosa.png" alt=""></div>
+            <div class="buttons">
+            <button id="goBack">Retroceder</button>
+            <button id="retry">Reintentar</button>
+            </div>
+        </div>
     </div>
 <script src="./js/funcionesMap.js"></script>
 </body>

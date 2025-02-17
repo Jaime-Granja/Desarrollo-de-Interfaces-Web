@@ -1,4 +1,6 @@
-
+h1 {
+    font-size: 4rem;
+}
 #grid {
     display: grid;
     position: relative;
@@ -23,22 +25,36 @@
     font-weight: bold;
     color: gold;
     position: absolute;
-    opacity: 0; /* Inicialmente invisible */
-    transition: opacity 0.3s ease; /* Suaviza el cambio de opacidad */
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 .x-roja {
     position: absolute;
     font-size: 24px;
     color: red;
     font-weight: bold;
-    pointer-events: none; /* Asegúrate de que no interfiera con los clics */
+    pointer-events: none;
 }
 
-#margenes {
+#cuerpo {
     display: flex;
     gap: 2rem;
 }
+.margenes {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.brujula, p {
+    background-color: #d4b790; 
+    border: 3px solid #8b5a2b;
+    color: #4b3621;
+  }
+.buttons {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+}
 button {
     height: 3rem;
-    margin-top: 47.7rem;
 }

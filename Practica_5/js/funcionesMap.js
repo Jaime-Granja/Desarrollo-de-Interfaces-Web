@@ -1,9 +1,14 @@
 //Botón para volver a Índice
 let retroceder = document.getElementById("goBack");
 retroceder.addEventListener("click", function() {
-  window.location.href = "carga.html?origen=juego";
+  window.location.href = "carga.html?destino=index.html";
 });
-
+//Botón para reintentar
+let reintentar = document.getElementById("retry");
+reintentar.addEventListener("click", function() {
+  window.location.href = "carga.html?destino=juegoRetry";
+});
+//Función para crear el tesoro de forma aleatoria y comprobar el juego.
 document.addEventListener("DOMContentLoaded", function () {
   const grid = document.getElementById("grid");
   const filas = 21;

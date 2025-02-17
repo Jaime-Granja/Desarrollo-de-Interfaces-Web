@@ -1,12 +1,10 @@
 const params = new URLSearchParams(window.location.search);
-const origen = params.get("origen");
-
-if (origen === "index") {
+const destino = params.get("destino");
+ carga = setTimeout(function() {
+    window.location.href = destino;}, 4000);
+console.log(destino)
+ if (destino == "juegoRetry") {
     setTimeout(function() {
-        window.location.href = "juego.html";
-    }, 3000);
-} else if (origen === "juego") {
-    setTimeout(function() {
-        window.location.href = "index.html";
-    }, 3000);
-}
+    window.location.href = "juego.html";}, 2000);
+    clearTimeout(carga)
+ }

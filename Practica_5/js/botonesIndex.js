@@ -30,7 +30,7 @@ function siONo() {
   let noBoton = document.getElementById("no");
 
   siBoton.addEventListener("click", function() {
-    window.location.href = "carga.html?origen=index";
+    window.location.href = "carga.html?destino=juego.html";
   });
   noBoton.addEventListener("click", function() {
     Textos("confirmarTexto");
