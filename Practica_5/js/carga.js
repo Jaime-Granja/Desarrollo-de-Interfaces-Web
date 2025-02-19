@@ -2,7 +2,6 @@ const params = new URLSearchParams(window.location.search);
 const destino = params.get("destino");
  carga = setTimeout(function() {
     window.location.href = destino;}, 4000);
-console.log(destino)
  if (destino == "juegoRetry") {
     setTimeout(function() {
     window.location.href = "juego.html";}, 2000);

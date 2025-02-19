@@ -25,174 +25,145 @@ document.addEventListener("DOMContentLoaded", function () {
     //Ahora establecemos dónde va a estar nuestro tesoro.
   let filaAleatoria = Math.floor(Math.random() * filas);
   let columnaAleatoria = Math.floor(Math.random() * columnas);
-    //Y aquí creamos el tesoro, este sería un componente web una vez lo cambie.
-  let elemento = document.createElement("div");
-  elemento.classList.add("treasure");
-  elemento.textContent = "X";
-
-  elemento.style.position = "absolute";
-  elemento.style.top = `${filaAleatoria * tamanoCeldaAlto}px`;
-  elemento.style.left = `${columnaAleatoria * tamanoCeldaAncho}px`;
-  elemento.style.width = `${tamanoCeldaAncho}px`;
-  elemento.style.height = `${tamanoCeldaAlto}px`;
-
-  elemento.style.opacity = "0";
-
-  grid.appendChild(elemento);
-  console.log("Columna: ", columnaAleatoria)
-  console.log("Fila: ", filaAleatoria)
-
-  function mostrarTesoro() {
-    elemento.style.opacity = "1";
+    //Y aquí creamos el componente web del tesoro, lo llamaremos mi-tesoro
+    class Tesoro extends HTMLElement {
+        constructor() {
+          super(); 
+          this.attachShadow({mode: 'open'}); 
+        }
+        connectedCallback() {
+          this.shadowRoot.innerHTML = `
+            <style>
+              div {
+                position: absolute;
+                pointer-events: auto;
+              }
+            </style>
+            <div>X</div>
+          `;
+        }
+      }
+      customElements.define('mi-tesoro', Tesoro);
+      let elemento = document.createElement("mi-tesoro");
+      elemento.classList.add("treasure");
+      elemento.style.top = `${filaAleatoria * tamanoCeldaAlto}px`;
+      elemento.style.left = `${columnaAleatoria * tamanoCeldaAncho}px`;
+      elemento.style.width = `${tamanoCeldaAncho}px`;
+      elemento.style.height = `${tamanoCeldaAlto}px`;
+      elemento.style.zIndex = -2;
+      
+      // Añadimos el componente web al contenedor grid
+      grid.appendChild(elemento);
+      
+      // Pasamos por consola la posición del tesoro para testearlo de forma más fácil.
+      console.log("Columna: ", columnaAleatoria);
+      console.log("Fila: ", filaAleatoria);
+      
+      function mostrarTesoro() {
+        elemento.style.opacity = "1";
+        elemento.style.zIndex = "10";
+      }
+  function verificarTesoro(filaClickada, columnaClickada) {
+    return new Promise((resolve, reject) => {
+      if (filaClickada === filaAleatoria && columnaClickada === columnaAleatoria) {
+        resolve();
+      } else {
+        reject();
+      }
+    });
   }
+    //Aquí tenemos lo que ocurre si se encuentra el tesoro.
 
-  elemento.addEventListener("click", function () {
-    if (!tesoroEncontrado) {
-      alert("¡Has encontrado el tesoro! ¡Felicidades!");
-      mostrarTesoro(); 
-      tesoroEncontrado = true;
-      let cofre = document.getElementById("cofre")
-      cofre.style.display = "block"
-      let brujula = document.getElementById("brujula")
-      brujula.style.display = "none"  
-    }
-  });
-
-  let anguloBrujula = 0; // Ángulo actual de la brújula
-    let animacionBrujula; // Variable para almacenar la animación en curso
-
-    // Dirección del tesoro
-    let direccionTesoro = ""; // Inicialmente no sabemos la dirección del tesoro
-
-    function actualizarDireccionTesoro(filaClickeada, columnaClickeada) {
-    // Determinar la dirección con la lógica que ya tienes
-    if (filaClickeada !== filaAleatoria || columnaClickeada !== columnaAleatoria) {
-        if (filaClickeada > filaAleatoria) {
-            if (columnaClickeada > columnaAleatoria) {
-                direccionTesoro = "NW";
-            } else if (columnaClickeada < columnaAleatoria) {
-                direccionTesoro = "NE";
-            } else {
-                direccionTesoro = "N";
-            }
-        } else if (filaClickeada < filaAleatoria) {
-            if (columnaClickeada > columnaAleatoria) {
-                direccionTesoro = "SW";
-            } else if (columnaClickeada < columnaAleatoria) {
-                direccionTesoro = "SE";
-            } else {
-                direccionTesoro = "S";
-            }
-        } else if (filaClickeada == filaAleatoria) {
-            if (columnaClickeada > columnaAleatoria) {
-                direccionTesoro = "W";
-            } else if (columnaClickeada < columnaAleatoria) {
-                direccionTesoro = "E";
+    let anguloBrujula = 0;
+    let animacionBrujula;
+    let direccionTesoro = "";
+    //Con esta función sabremos en qué dirección está el tesoro y giraremos la brújula.
+    function actualizarDireccionTesoro(filaClickada, columnaClickada) {
+        if (filaClickada !== filaAleatoria || columnaClickada !== columnaAleatoria) {
+            if (filaClickada > filaAleatoria) {
+                if (columnaClickada > columnaAleatoria) {
+                    direccionTesoro = "NW";
+                    anguloObjetivo = 315;
+                } else if (columnaClickada < columnaAleatoria) {
+                    direccionTesoro = "NE";
+                    anguloObjetivo = 45;
+                } else {
+                    direccionTesoro = "N";
+                    anguloObjetivo = 0;
+                }
+            } else if (filaClickada < filaAleatoria) {
+                if (columnaClickada > columnaAleatoria) {
+                    direccionTesoro = "SW";
+                    anguloObjetivo = 225;
+                } else if (columnaClickada < columnaAleatoria) {
+                    direccionTesoro = "SE";
+                    anguloObjetivo = 135;
+                } else {
+                    direccionTesoro = "S";
+                    anguloObjetivo = 180;
+                }
+            } else if (filaClickada == filaAleatoria) {
+                if (columnaClickada > columnaAleatoria) {
+                    direccionTesoro = "W";
+                    anguloObjetivo = 270;
+                } else if (columnaClickada < columnaAleatoria) {
+                    direccionTesoro = "E";
+                    anguloObjetivo = 90;
+                }
             }
         }
+        girarBrujula(anguloObjetivo);
+        return direccionTesoro;
     }
-}
-
-// Función para actualizar el giro de la brújula en base a la dirección
-function actualizarAnguloBrujula() {
-    let anguloObjetivo = 0;
-
-    // Mapeamos las direcciones a valores de rotación
-    switch (direccionTesoro) {
-        case "N":
-            anguloObjetivo = 0; // Norte
-            break;
-        case "NE":
-            anguloObjetivo = 45; // Noreste
-            break;
-        case "E":
-            anguloObjetivo = 90; // Este
-            break;
-        case "SE":
-            anguloObjetivo = 135; // Sureste
-            break;
-        case "S":
-            anguloObjetivo = 180; // Sur
-            break;
-        case "SW":
-            anguloObjetivo = 225; // Suroeste
-            break;
-        case "W":
-            anguloObjetivo = 270; // Oeste
-            break;
-        case "NW":
-            anguloObjetivo = 315; // Noroeste
-            break;
-        default:
-            anguloObjetivo = 0; // Default (no hay dirección)
-            break;
-    }
-
-    // Animar el giro de la brújula hacia el ángulo objetivo
-    girarBrujula(anguloObjetivo);
-}
-
-// Función para animar el giro de la brújula
-function girarBrujula(anguloObjetivo) {
-    // Cancelar cualquier animación anterior
-    if (animacionBrujula) {
-        cancelAnimationFrame(animacionBrujula);
-    }
-
-    // Función para animar el giro suavemente
-    function animar() {
-        let diferencia = (anguloObjetivo - anguloBrujula + 180) % 360 - 180;
-
-        // Suavizar la transición: hacer que el ángulo de la brújula se acerque al ángulo objetivo
-        anguloBrujula += diferencia * 0.1; // Controlar la velocidad del giro
-
-        // Actualizar la rotación de la brújula
-        brujula.style.transform = `rotate(${anguloBrujula}deg)`;
-
-        // Continuar la animación hasta que la brújula haya alcanzado el ángulo objetivo
-        if (Math.abs(diferencia) > 1) {
-            animacionBrujula = requestAnimationFrame(animar);
+    // Función para animar el giro de la brújula
+    function girarBrujula(anguloObjetivo) {
+        if (animacionBrujula) {
+            cancelAnimationFrame(animacionBrujula);
         }
+        function animar() {
+            let diferencia = (anguloObjetivo - anguloBrujula + 180) % 360 - 180;
+            anguloBrujula += diferencia * 0.1;
+            brujula.style.transform = `rotate(${anguloBrujula}deg)`;
+            // Continuar la animación hasta que la brújula haya alcanzado el ángulo objetivo
+            if (Math.abs(diferencia) > 1) {
+                animacionBrujula = requestAnimationFrame(animar);
+            }
+        }
+        // Iniciar la animación
+        animacionBrujula = requestAnimationFrame(animar);
     }
-
-    // Iniciar la animación
-    animacionBrujula = requestAnimationFrame(animar);
-}
-
-// Función que maneja los clics en el mapa
-function manejarClic(e) {
-    if (tesoroEncontrado) return;
-
-    let x = e.offsetX;
-    let y = e.offsetY;
-
-    let columnaClickeada = Math.floor(x / tamanoCeldaAncho);
-    let filaClickeada = Math.floor(y / tamanoCeldaAlto);
-
-    // Actualizar la dirección del tesoro
-    actualizarDireccionTesoro(filaClickeada, columnaClickeada);
-
-    // Si no se ha encontrado el tesoro, actualizar la brújula
-    if (direccionTesoro) {
-        actualizarAnguloBrujula();
+    // Función que maneja los clicks en el mapa y ejecuta la promesa
+    function manejarClic(e) {
+        if (tesoroEncontrado) return;
+        let x = e.offsetX;
+        let y = e.offsetY;
+        let columnaClickada = Math.floor(x / tamanoCeldaAncho);
+        let filaClickada = Math.floor(y / tamanoCeldaAlto);
+        let direccion = actualizarDireccionTesoro(filaClickada, columnaClickada); 
+        verificarTesoro(filaClickada, columnaClickada)
+        .then(()=> {
+            mostrarTesoro();
+            tesoroEncontrado = true;
+            let cofre = document.getElementById("cofre")
+            cofre.style.display = "block"
+            let brujula = document.getElementById("brujula")
+            brujula.style.display = "none"
+            let titulo = document.getElementById("titulo")
+            titulo.style.display = "none"
+            let felicitacion = document.getElementById("felicitacion")
+            felicitacion.style.display = "block"
+        })
+        .catch(() => {
+            let fallo = document.createElement("div");
+            fallo.classList.add("fallo");
+            fallo.textContent = direccionTesoro;
+            fallo.style.top = `${filaClickada * tamanoCeldaAlto}px`;
+            fallo.style.left = `${columnaClickada * tamanoCeldaAncho}px`;
+            grid.appendChild(fallo);
+            contadorErrores++;
+            contadorErroresElem.textContent = contadorErrores;
+        });
     }
-
-    if (filaClickeada !== filaAleatoria || columnaClickeada !== columnaAleatoria) {
-        let xRoja = document.createElement("div");
-        xRoja.classList.add("x-roja");
-        xRoja.textContent = direccionTesoro;
-
-        xRoja.style.top = `${filaClickeada * tamanoCeldaAlto}px`;
-        xRoja.style.left = `${columnaClickeada * tamanoCeldaAncho}px`;
-
-        grid.appendChild(xRoja);
-
-        contadorErrores++;
-        contadorErroresElem.textContent = contadorErrores;
-    }
-}
-
-grid.addEventListener("click", manejarClic);
-
-  grid.addEventListener("click", manejarClic);
+    //Llamada a la función manejarClic
+    grid.addEventListener("click", manejarClic);
 });
